@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pong CPU</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="favicon.png" type="image/x-icon">
+  <style>
+    html, body {
+      margin: 0;
+      height: 100%;
+      font-family: monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #000;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .title {
+      font-size: 50px;
+      text-align: center;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+
+    canvas {
+      border: 1px solid #fff;
+    }
+
+    .about-btn {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 10px 20px;
+      background-color: #fff;
+      color: #000;
+      border: none;
+      cursor: pointer;
+      z-index: 1;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      text-align: center;
+      position: relative;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .emergency-text {
+      position: absolute;
+      bottom: 10px;
+      text-align: center;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+	<div class="container">
+	  <div class="title">Left or Right</div>
+	  <canvas id="gameCanvas" width="800" height="400"></canvas>
+	  <p class="emergency-text">In case of emergency press CTRL + R</p>
+	</div>
+  
+	<button class="about-btn">About...</button>
+  
+	<div class="modal" id="modal">
+	  <div class="modal-content">
+		<span class="close-btn" id="close">&times;</span>
+		<h2>About Me</h2>
+		<p>Made by Roger Rosset to fry your CPU.</p>
+		<p><a href="https://github.com/rrosset91">GitHub</a></p>
+		<p><a href="https://rrosset.com">My Website</a></p>
+	  </div>
+	</div>
+  
+	<audio id="audio1" src="1.mp3" preload="auto"></audio>
+	<audio id="audio2" src="2.mp3" preload="auto"></audio>
+	<script src="script.js"></script>
+	<script>
+	  const aboutBtn = document.querySelector('.about-btn');
+	  const modal = document.getElementById('modal');
+	  const closeBtn = document.getElementById('close');
+  
+	  aboutBtn.addEventListener('click', () => {
+		modal.style.display = 'flex';
+	  });
+  
+	  closeBtn.addEventListener('click', () => {
+		modal.style.display = 'none';
+	  });
+	</script>
+</body>
+</html>
