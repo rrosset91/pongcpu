@@ -18,11 +18,11 @@ function Ball ( x, y, speedX, speedY, color ) {
 }
 
 function drawGame () {
-	// Desenha o fundo
+
 	ctx.fillStyle = "#000";
 	ctx.fillRect( 0, 0, canvas.width, canvas.height );
 
-	// Desenha todas as bolas
+
 	balls.forEach( ball => {
 		ctx.fillStyle = ball.color;
 		ctx.fillRect( ball.x - ballSize / 2, ball.y - ballSize / 2, ballSize, ballSize );
@@ -94,6 +94,43 @@ function startMovement ( directionX, directionY ) {
 	balls.push( newBall );
 }
 
+let initialX = null;
+let initialY = null;
+let threshold = 50;
+
+document.addEventListener( "touchstart", ( event ) => {
+	if ( gameStarted ) return;
+	initialX = event.touches[0].clientX;
+	initialY = event.touches[0].clientY;
+} );
+
+document.addEventListener( "touchmove", ( event ) => {
+	if ( !initialX || !initialY || gameStarted ) return;
+
+	let currentX = event.touches[0].clientX;
+	let currentY = event.touches[0].clientY;
+
+	let diffX = initialX - currentX;
+	let diffY = initialY - currentY;
+
+	if ( Math.abs( diffX ) > threshold || Math.abs( diffY ) > threshold )
+	{
+		if ( Math.abs( diffX ) > Math.abs( diffY ) )
+		{
+			startMovement( diffX > 0 ? -1 : 1, 0 );
+		}
+
+		initialX = null;
+		initialY = null;
+	}
+} );
+
+document.addEventListener( "touchend", () => {
+	initialX = null;
+	initialY = null;
+} );
+
+
 document.addEventListener( "keydown", ( event ) => {
 	if ( gameStarted ) return;
 
@@ -134,13 +171,13 @@ function checkBallCollision ( ballA, ballB ) {
 		const sin = Math.sin( angle );
 		const cos = Math.cos( angle );
 
-		// Rotaciona as velocidades
+
 		const velocityX1 = ballA.speedX * cos + ballA.speedY * sin;
 		const velocityY1 = ballA.speedY * cos - ballA.speedX * sin;
 		const velocityX2 = ballB.speedX * cos + ballB.speedY * sin;
 		const velocityY2 = ballB.speedY * cos - ballB.speedX * sin;
 
-		// Troca as velocidades na direção x
+
 		ballA.speedX = cos * velocityX2 - sin * velocityY1;
 		ballA.speedY = sin * velocityX2 + cos * velocityY1;
 		ballB.speedX = cos * velocityX1 - sin * velocityY2;

@@ -32,6 +32,9 @@
 
     canvas {
       border: 1px solid #fff;
+      width: 100%; /* Adjust canvas width */
+      max-width: 800px; /* Set a maximum width */
+      height: auto; /* Allow height to adjust accordingly */
     }
 
     .about-btn {
@@ -87,7 +90,7 @@
 	<div class="container">
 	  <div class="title">Left or Right</div>
 	  <canvas id="gameCanvas" width="800" height="400"></canvas>
-	  <p class="emergency-text">In case of emergency press CTRL + R</p>
+	  <p class="emergency-text">In case of emergency refresh the page</p>
 	</div>
   
 	<button class="about-btn">About...</button>
