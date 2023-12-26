@@ -6,7 +6,7 @@ const ballSize = 10;
 let gameStarted = false;
 let ballColor = "#f00";
 let balls = [];
-const initialSpeed = 1;
+const initialSpeed = 0.5;
 const angleVariation = 1.1;
 
 function Ball ( x, y, speedX, speedY, color ) {
